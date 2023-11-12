@@ -19,7 +19,7 @@
         <ul id="sidemenu">
           <li><a href="#header">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#Contact">Contact</a></li>
           <li><a href="./project.html">Projects</a></li>
           <i class="fas fa-times" onclick="closemenu()"></i>
         </ul>
@@ -54,10 +54,10 @@
           </div>
           <div class="tab-contents" id="experience">
             <ul>
-              <li><span>HTML</span><br>Webs</li>
-              <li><span>CSS</span><br>Style</li>
-              <li><span>Javascript</span><br>N/A</li>
-              <li><span>Python</span><br>Basics</li>
+              <li><span>HTML</span><br>intermediate level</li>
+              <li><span>CSS</span><br>intermediate level</li>
+              <li><span>Javascript</span><br>intermediate level</li>
+              <li><span>Python</span><br>intermediate level</li>
             </ul>
           </div>
         </div>
@@ -70,7 +70,6 @@
 
 
 <div class="slideshow-container">
-
   <div class="mySlides fade">
     <img src="media/1.jpg" style="width:100%">
   </div>
@@ -85,16 +84,23 @@
 
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+  <!-- Add dot elements for each slide -->
+  <div class="dot" onclick="currentSlide(1)"></div>
+  <div class="dot" onclick="currentSlide(2)"></div>
+  <div class="dot" onclick="currentSlide(3)"></div>
 </div>
 <br>
 
 
 <!-------------------------------contact------------------------->
- 
+ <div id="Contact">
+  <h2>Contact Me</h2>
+ </div>
 <form id="validation-form">
   <input type="text" id="name" placeholder="Name" required>
   <input type="text" id="email" placeholder="Email" required>
-  <textarea id="msg" name="textarea" rows="6" cols="38" placeholder="Message..." width required maxlength="20"></textarea>
+  <textarea id="msg" type="textarea" rows="6" cols="38" placeholder="Message..." required maxlength="30"></textarea>
   <button type="submit" id="submit-button" disabled>Submit</button>
   <button type="button" id="clear-button">Clear Form</button>
 </form>
@@ -102,13 +108,13 @@
 
 
   <!----------------------------------------------------->
-  
-
 
 
 <!----------------------------------------------------------------------->
+  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   <script type = "text/javascript" src= "./bootstrap.js"></script>
-  <script type = "text/javascript" src= "./script.js"></script>
+  <script defer src= "./script.js"></script>
 
   
 </body>

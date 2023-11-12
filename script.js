@@ -37,55 +37,105 @@ showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  showSlides((slideIndex += n));
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  showSlides((slideIndex = n));
 }
 
 function showSlides(n) {
   let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
+  const slides = document.getElementsByClassName("mySlides");
+  const dots = document.getElementsByClassName("dot");
+
+  // Check if slideIndex is out of bounds
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+
+  // Hide all slides
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
+
+  // Remove "active" class from all dots
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+
+  // Display the current slide
+  slides[slideIndex - 1].style.display = "block";
+
+  // Add "active" class to the corresponding dot
+  dots[slideIndex - 1].className += " active";
 }
 
 
 //-----------------------contact----------------------------------------------------
-const form = document.getElementById("validation-form");
-const submitButton = document.getElementById("submit-button");
-const clearButton = document.getElementById("clear-button");
 
-form.addEventListener("input", function () {
-    const inputs = form.querySelectorAll("input[required]");
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("validation-form");
+  const submitButton = document.getElementById("submit-button");
+  const clearButton = document.getElementById("clear-button");
+
+  form.addEventListener("input", function () {
+    validateForm();
+  });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    alert("Form submitted!");
+    form.reset();
+    submitButton.disabled = true; 
+  });
+
+  clearButton.addEventListener("click", function () {
+    const inputs = form.querySelectorAll("input[required], textarea[required]");
+
+    inputs.forEach(function (input) {
+      input.classList.remove("error");
+    });
+
+    form.reset();
+    submitButton.disabled = true;
+  });
+
+  function validateForm() {
+    const emailInput = form.querySelector("#email");
+    const msgInput = form.querySelector("#msg");
+    
+    const inputs = form.querySelectorAll("input[required], textarea[required]");
     let isFormValid = true;
 
     inputs.forEach(function (input) {
-        if (input.value.trim() === "") {
-            isFormValid = false;
-            input.classList.add("error");
-        } else {
-            input.classList.remove("error");
-        }
+      if (input.value.trim() === "") {
+        isFormValid = false;
+        input.classList.add("error");
+      } else {
+        input.classList.remove("error");
+      }
     });
 
-    submitButton.disabled = !isFormValid;
-  });
+    // Check if the email is valid
+    if (!isValidEmail(emailInput.value.trim())) {
+      isFormValid = false;
+      emailInput.classList.add("error");
+    } else {
+      emailInput.classList.remove("error");
+    }
 
-clearButton.addEventListener("click", function () {
-    form.reset();
-    submitButton.disabled = true;
+    submitButton.disabled = !isFormValid;
+  }
+
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 });
 
 
