@@ -82,6 +82,31 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("validation-form");
   const submitButton = document.getElementById("submit-button");
   const clearButton = document.getElementById("clear-button");
+  const modalOverlay = document.getElementById("modal-overlay");
+  const successModal = document.getElementById("success-modal");
+  const closeModalButton = document.getElementById("close-modal");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    showModal();
+    form.reset();
+    submitButton.disabled = true;
+  });
+
+  closeModalButton.addEventListener("click", function () {
+    hideModal();
+  });
+
+  function showModal() {
+    modalOverlay.style.display = "flex";
+    document.body.classList.add("modal-open");
+  }
+
+  function hideModal() {
+    modalOverlay.style.display = "none";
+    document.body.classList.remove("modal-open");
+  }
+  
 
   form.addEventListener("input", function () {
     validateForm();
@@ -89,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    alert("Form submitted!");
+
     form.reset();
     submitButton.disabled = true; 
   });
@@ -103,6 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.reset();
     submitButton.disabled = true;
+
+    successMessage.style.display = "none";
+
   });
 
   function validateForm() {
@@ -137,5 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return emailRegex.test(email);
   }
 });
+
+//-----------------------modal----------------------------------------------------
 
 
